@@ -1,0 +1,47 @@
+<h1>Task Stack</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Title</th>
+      <th>Pushed at</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= form_tag action: 'create' do %>
+    <tr>
+      <td>
+        <%= select_tag :project_id, options_from_collection_for_select(@projects, :id, :name) %>
+      </td>
+      <td>
+        <%= text_field_tag :title %>
+      </td>
+      <td>N/A</td>
+      <td>
+        <%= submit_tag '+Push' %>
+      </td>
+      <td>
+        <% if Stack.top %>
+        <%= link_to '-Pop', stack_path, :method => :delete %>
+        <% end %>
+      </td>
+    </tr>
+    <% end %>
+    <% @tasks.each do |t| %>
+      <tr>
+        <td><%= t.project.name if t.project %></td>
+        <td><%= t.title %></td>
+        <td><%= time_ago_in_words(t.pushed_at) %> ago</td>
+        <td><%= link_to 'Show', t %></td>
+        <td><%= link_to 'Edit', edit_task_path(t) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+
