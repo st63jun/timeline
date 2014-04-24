@@ -1,47 +1,37 @@
-<h1>Task Stack</h1>
+<div id="input">
+  <%= form_tag action: 'create' do %>
+  <%= select_tag :project_id, options_from_collection_for_select(@projects, :id, :name), include_blank: true %>
+  <%= text_field_tag :title %>
+  <%= submit_tag 'PUSH' %>
+  <% end %>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Project</th>
-      <th>Title</th>
-      <th>Pushed at</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <%= form_tag action: 'create' do %>
-    <tr>
-      <td>
-        <%= select_tag :project_id, options_from_collection_for_select(@projects, :id, :name) %>
-      </td>
-      <td>
-        <%= text_field_tag :title %>
-      </td>
-      <td>N/A</td>
-      <td>
-        <%= submit_tag '+Push' %>
-      </td>
-      <td>
-        <% if Stack.top %>
-        <%= link_to '-Pop', stack_path, :method => :delete %>
-        <% end %>
-      </td>
-    </tr>
-    <% end %>
-    <% @tasks.each do |t| %>
+<div id="stack">
+<% if @tasks.any? %>
+  <table>
+    <thead>
       <tr>
-        <td><%= t.project.name if t.project %></td>
-        <td><%= t.title %></td>
-        <td><%= time_ago_in_words(t.pushed_at) %> ago</td>
-        <td><%= link_to 'Show', t %></td>
-        <td><%= link_to 'Edit', edit_task_path(t) %></td>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-
+    <tbody>
+      <% @tasks.each_with_index do |t, i| %>
+      <tr>
+        <td class="mark">&nbsp;&nbsp;&nbsp;</td>
+        <td class="i"><%= i.zero? ? link_to("*", stack_path, :method => :delete, :id => 'top') : link_to(@tasks.size - i, t) %>.</td>
+        <td class="pn"><%= '[' + t.project.name + ']' if t.project %></td>
+        <td class="tt"><%= t.title %></td>
+        <td class="pa"><%= link_to time_ago_in_words(t.pushed_at) + ' ago', t %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty">*There are no task, yay!*</div>
+<% end %>
+</div>

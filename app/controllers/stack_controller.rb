@@ -10,10 +10,10 @@ class StackController < ApplicationController
     @task = Task.new(task_params)
     respond_to do |format|
       if Stack.push(@task)
-        format.html { redirect_to stack_url, notice: 'Task was successfully pushed.' }
+        format.html { redirect_to root_path, notice: 'Task was successfully pushed.' }
         format.json { head :created }
       else
-        format.html { redirect_to stack_url }
+        format.html { redirect_to root_path }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -22,10 +22,10 @@ class StackController < ApplicationController
   def destroy
     respond_to do |format|
       if Stack.pop
-        format.html { redirect_to stack_url, notice: 'Task was successfully popped.' }
+        format.html { redirect_to root_path, notice: 'Task was successfully popped.' }
         format.json { head :ok }
       else
-        format.html { redirect_to stack_url }
+        format.html { redirect_to root_path }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end

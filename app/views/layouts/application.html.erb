@@ -8,7 +8,22 @@
 </head>
 <body>
 
-<%= yield %>
+<h1 class="app-title"><%= link_to 'The Timeline', root_path %></h1>
+<nav>
+  <ul>
+    <li><%= link_to 'Stack', root_path, class: cp(root_path) %></li>
+    <li><%= link_to 'Projects', projects_path, class: cp(projects_path) %></li>
+    <li><%= link_to 'Tasks', tasks_path, class: cp(tasks_path) %></li>
+    <li><%= link_to 'Tags', tags_path, class: cp(tags_path) %></li>
+</nav>
+
+<div id="content">
+  <%= yield %>
+</div>
+
+<footer>
+  &copy; Jun SAITO
+</footer>
 
 </body>
 </html>

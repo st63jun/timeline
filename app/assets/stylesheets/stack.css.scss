@@ -1,3 +1,66 @@
 // Place all the styles related to the Stack controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#input {
+    padding-bottom: 20px;
+    text-align: center;
+    #title {
+        height: 32px;
+        width: 80%;
+        font-size: 18px;
+    }
+}
+
+#stack {
+    td {
+        font-family: monospace;
+        font-size: 12pt;
+        padding: 10px 0;
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            color: black;
+            background-color: transparent;
+            text-decoration: underline;
+        }
+        a:visited {
+            color: black;
+        }
+        a:active {
+            color: gray;
+        }
+    }
+    .i {
+        text-align: right;
+    }
+    tr:first-child {
+        font-weight: bold;
+    }
+    .pn, .tt {
+        font-size: 14pt;
+        letter-spacing: 0.1em;
+    }
+    .pn {
+        padding-left: 30px;
+        padding-right: 10px;
+        width: 30em;
+    }
+    .tt {
+        padding-left: 10px;
+        padding-right: 30px;
+        line-height: 1.1;
+        word-break: break-all;
+        width: 50%;
+    }
+    .pa {
+        font-size: 10pt;
+        width: 25em;
+    }
+    .empty {
+        text-align: center;
+        font-family: monospace;
+        font-size: 12pt;
+    }
+}

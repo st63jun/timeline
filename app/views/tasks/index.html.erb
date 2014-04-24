@@ -4,21 +4,26 @@
   <thead>
     <tr>
       <th>Project</th>
-      <th>Parent</th>
       <th>Title</th>
-      <th colspan="3"></th>
+      <th>Pushed</th>
+      <th>Duration</th>
+      <th>
     </tr>
   </thead>
 
   <tbody>
     <% @tasks.each do |task| %>
       <tr>
-        <td><%= task.project_id %></td>
-        <td><%= task.parent_id %></td>
+        <td><%= task.project.name if task.project %></td>
         <td><%= task.title %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= task.pushed_at %></td>
+        <td>
+          <% if task.popped_at.nil? %>
+            Incomplete
+          <% else %>
+            <%= Timespan.new(from: task.pushed_at, to: task.popped_at).duration.format("%th %~h %m %~m %s %~s") %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
