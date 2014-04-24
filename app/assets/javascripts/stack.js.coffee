@@ -2,6 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready -> $('#top').hover(
-                  () -> $("#stack tr:first-child td.mark").html("POP")
+toggle =  -> $('#top').hover(
+                  () -> $("#stack tr:first-child td.mark").html("POP"),
                   () -> $("#stack tr:first-child td.mark").html("&nbsp;&nbsp;&nbsp;"));
+$(document).on('page:load', toggle);
+$(document).ready(toggle);
